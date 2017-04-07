@@ -1,5 +1,6 @@
 ﻿using System;
 using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 namespace ConsoleApplication1
 {
@@ -17,6 +18,7 @@ namespace ConsoleApplication1
                 new LoggerConfiguration()
                     .Enrich.WithMachineName()
                     .WriteTo.Trace(outputTemplate: OutputFormat)
+                    .WriteTo.Elasticsearch().ReadFrom.AppSettings()
                     .WriteTo.LiterateConsole(outputTemplate: OutputFormat)
                     .CreateLogger();
         }
